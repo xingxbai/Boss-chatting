@@ -1,39 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore,applyMiddleware,compose} from 'redux'
-import {counter} from './index.redux'
 import {Provider} from 'react-redux'
+import {BrowserRouter,Route,Redirect} from 'react-router-dom'
 import 'antd-mobile/dist/antd-mobile.css';
 import thunk from 'redux-thunk'
-import App from './App';
-const store=createStore(counter, compose(
+import './config'
+import Login from './container/login/login'
+import GeniusInfo from './container/geniusInfo/geniusInfo'
+import BossInfo from './container/bossInfo/bossInfo'
+import Register from './container/register/register'
+import AuthRoute from './component/authroute/authroute'
+import reducers from './reducer'
+const store=createStore(reducers, compose(
     applyMiddleware(thunk),
     window.devToolsExtension?window.devToolsExtension():f=>f
 ))
-ReactDOM.render((
-    <Provider store={store}><App /></Provider>), document.getElementById('root'));
-// import {createStore} from 'redux'
-// function counter(state=0,action){
-//     switch(action.type){
-//         case '加机关枪':
-//             return state+1
-//         case '减机关枪':
-//             return state-1
-//         default:
-//             return state=10
-//     }
-// }
-// const store=createStore(counter)
-// function listener(){
-//     const current=store.getState();
-//     console.log(`现在有机关枪${current}`)
-// }
-// store.subscribe(listener)
-// console.log(store.getState())
-// store.dispatch({type:"加机关枪"})
-// console.log(store.getState())
-// store.dispatch({type:"加机关枪"})
-// console.log(store.getState())
-// store.dispatch({type:"减机关枪"})
-// console.log(store.getState())
+function Boss(){
+    return <h2>boss</h2>
+}
+function Genius(){
+    return <h2>genius</h2>
+}
 
+
+ReactDOM.render((
+    <Provider store={store}>
+        <BrowserRouter>
+            <div>
+                    <AuthRoute/>
+                    <Route path='/' exact component={Login}/>
+                    <Route path='/boss' exact component={Boss}/>
+                    <Route path='/bossinfo' exact component={BossInfo}/>
+                    <Route path='/genius' exact component={Genius}/>
+                    <Route path='/geniusinfo' exact component={GeniusInfo}/>
+                    <Route path='/register' component={Register}/>
+                    <Route path='/login' component={Login}/>
+            </div>
+        </BrowserRouter>
+    </Provider>
+    ),
+    document.getElementById('root'));
