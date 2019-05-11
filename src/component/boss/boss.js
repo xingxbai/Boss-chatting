@@ -14,18 +14,6 @@ class Boss extends React.Component{
     componentDidMount() {
         const pathname=this.props.location.pathname=='/boss'?'genius':'boss'
         this.props.getUserList(pathname)
-        // axios.get('/user/list',{
-        //     params:{
-        //         userType:pathname
-        //     }
-        // })
-        // .then(res=>{
-        //     if(res.status==200&&res.data.code==0){
-        //         this.setState({
-        //             data:res.data.data
-        //         })
-        //     }
-        // })
     }
     render(){
         return (
