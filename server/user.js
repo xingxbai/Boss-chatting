@@ -58,4 +58,13 @@ Router.post('/update',function(req,res){
 		return res.json({code:0,data})
 	})
 })
+Router.get('/list',function(req,res){
+	const {userType}=req.query
+	User.find({type:userType},{"pwd":0},function(err,doc){
+		if(err){
+			return res.json({code:1,msg:"查询出错"})
+		}
+		return res.json({code:0,data:doc})
+	})
+})
 module.exports=Router;
