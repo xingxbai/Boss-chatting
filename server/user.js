@@ -6,7 +6,7 @@ const User = model.getModel('user')
 Router.get('/info',function(req,res){
 	const userid=req.cookies.userid;
 	User.findOne({_id:userid},{"pwd":0},function(err,doc){
-		if(err){
+		if(!doc){
 			return res.json({code:1,msg:"没有找到cookie"})
 		}
 		return res.json({code:0,data:doc})
@@ -35,11 +35,11 @@ Router.post('/register', function(req, res){
 })
 Router.post('/login',function(req,res){
 	const {user,pwd}=req.body
-	User.findOne({user,pwd},function(err,doc){
+	User.findOne({user,pwd},{"pwd":0},function(err,doc){
 		if(doc){
 			const {user,type,_id,avatar}=doc
 			res.cookie('userid',_id)
-			return res.json({code:0,data:{user,type,avatar}})
+			return res.json({code:0,data:doc})
 		}
 		return res.json({code:1,msg:'用户名或者密码错误'})
 	})
@@ -54,8 +54,12 @@ Router.post('/update',function(req,res){
 		if(err){
 			return res.json({code:1,msg:"修改出错"})
 		}
-		const data=Object.assign({},body,{user:doc.user,type:doc.type})
-		return res.json({code:0,data})
+		User.findOne({_id:userid},{"pwd":0},function(err,doc){
+			if(err){
+				return res.json({code:1,msg:"修改出错"})
+			}
+			return res.json({code:0,data:doc})
+		})
 	})
 })
 Router.get('/list',function(req,res){

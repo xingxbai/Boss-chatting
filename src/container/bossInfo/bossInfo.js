@@ -36,8 +36,14 @@ class BossInfo extends React.Component{
                 }}></AvatarSelector>
                 <WhiteSpace/>
                 <WhiteSpace/>
+                <InputItem onChange={(v)=>this.onChange('company',v)}>
+                公司名称
+                </InputItem>
                 <InputItem onChange={(v)=>this.onChange('title',v)}>
-					招聘岗位
+                招聘岗位
+                </InputItem>
+                <InputItem onChange={(v)=>this.onChange('money',v)}>
+                薪资
                 </InputItem>
                 <WhiteSpace/>
                 <TextareaItem

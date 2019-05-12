@@ -33,6 +33,7 @@ ReactDOM.render((
     <Provider store={store}>
         <BrowserRouter>
             <div>
+                <AuthRoute/>
                     <Switch>
                         <Route path='/' exact component={Login}/>
                         <Route path='/bossinfo'  component={BossInfo}/>
@@ -46,4 +47,4 @@ ReactDOM.render((
     </Provider>
     ),
     document.getElementById('root'));
-    // <AuthRoute/>
+    // 

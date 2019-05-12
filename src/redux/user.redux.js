@@ -3,6 +3,7 @@ import axios from 'axios'
 import {getRedirectPath} from '../util'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const LOGIN_SUCESS = 'LOGIN_SUCESS'
+const LOGOUT_SUCESS = 'LOGOUT_SUCESS'
 const ERROR_MSG = 'ERROR_MSG'
 const UPDATE_SUCCESS='UPDATE_SUCCESS'
 const LOAD_DATA = 'LOAD_DATA'
@@ -25,6 +26,8 @@ export function user(state=initState,action){
             return {...state,msg:action.msg}
         case LOGIN_SUCESS:
             return {...state,...action.payload,msg:"",avatar:action.payload.avatar,redirectTo:getRedirectPath(action.payload)}
+        case LOGOUT_SUCESS:
+            return {...initState}
         default:
             return state
     }
@@ -40,6 +43,10 @@ function updateSuccess(data){
 }
 function LoginSuccess(data){
     return {type:LOGIN_SUCESS,payload:data}
+}
+function LogoutSuccess(){
+    
+    return {type:LOGOUT_SUCESS}
 }
 export function register({user,pwd,repeatpwd,type}){
     if(!user||!pwd||!repeatpwd){
@@ -71,18 +78,22 @@ export function login({user,pwd}){
         })
         .then(res=>{
             if(res.status==200&&res.data.code==0){
-                const {avatar,type}=res.data.data
-                dispatch(LoginSuccess({user,pwd,type,avatar}))
+                const data=res.data.data
+                dispatch(LoginSuccess(data))
             }else{
                 dispatch(errMsg(res.data.msg))
             }
         })
     }
 }
-export function update({desc,title,avatar}){
+export function logout(){
+    // Cookies.remove('userid');
+    return LogoutSuccess()
+}
+export function update({desc,title,avatar,money,company}){
     return dispatch=>{
         axios.post('/user/update',{
-            desc,title,avatar
+            desc,title,avatar,money,company
         })
         .then(res=>{
             if(res.status==200&&res.data.code==0){

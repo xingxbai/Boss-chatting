@@ -4,14 +4,10 @@ import {Switch,Route,withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import NavLinkBar from '../navLinkBar/navLinkBar'
 import Boss from '../boss/boss'
-function Genius(){
-    return <div>Genius</div>
-}
+import Genius from '../boss/boss'
+import Me from '../me/me'
 function Msg(){
     return <div>Msg</div>
-}
-function Me(){
-    return <div>Me</div>
 }
 @withRouter
 @connect(
