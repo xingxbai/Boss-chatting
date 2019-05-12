@@ -12,6 +12,7 @@ import BossInfo from './container/bossInfo/bossInfo'
 import Boss from './container/boss/boss'
 import Register from './container/register/register'
 import AuthRoute from './component/authroute/authroute'
+import Chat from './component/chat/chat'
 import DashBoard from './component/dashBoard/dashBoard'
 import reducers from './reducer'
 const store=createStore(reducers, compose(
@@ -33,11 +34,12 @@ ReactDOM.render((
     <Provider store={store}>
         <BrowserRouter>
             <div>
-                <AuthRoute/>
+                
                     <Switch>
                         <Route path='/' exact component={Login}/>
                         <Route path='/bossinfo'  component={BossInfo}/>
                         <Route path='/geniusinfo'  component={GeniusInfo}/>
+                        <Route path='/chat'  component={Chat}/>
                         <Route path='/register' component={Register}/>
                         <Route path='/login' component={Login}/>
                         <Route component={DashBoard}/>
@@ -47,4 +49,4 @@ ReactDOM.render((
     </Provider>
     ),
     document.getElementById('root'));
-    // 
+    // <AuthRoute/>
