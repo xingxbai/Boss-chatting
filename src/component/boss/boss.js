@@ -15,11 +15,14 @@ class Boss extends React.Component{
         const pathname=this.props.location.pathname=='/boss'?'genius':'boss'
         this.props.getUserList(pathname)
     }
+    linkChat(id){
+        this.props.history.push(`/chat/${id}`)
+    }
     render(){
         return (
             <div>
                 {this.props.userlist.map(v=>(
-                    <Card  key={v.user}>
+                    <Card  key={v.user} onClick={()=>{this.linkChat(v._id)}}>
                         <Card.Header
                         title={v.user}
                         thumb={require(`../img/${v.avatar}.png`)}

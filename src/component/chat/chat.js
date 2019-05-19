@@ -1,38 +1,75 @@
 import React from 'react'
-import {InputItem} from 'antd-mobile'
-import io from 'socket.io-client'
-const socket=io('ws://localhost:9093')
+import {InputItem,List,NavBar,Icon,Grid} from 'antd-mobile'
+import {connect }from 'react-redux'
+import {getMsgList,sendMsg,recvMsg} from '../../redux/chat.redux'
+@connect(
+    state=>state,
+    {getMsgList,sendMsg,recvMsg}
+)
 class Chat extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            chatContent:""
+            text:""
         }
     }
-    componentDidMount(){
-        socket.on('receMsg',function(data){
-            console.log('====================================');
-            console.log(data);
-            console.log('====================================');
-        })
+    componentDidMount() {
+        if(!this.props.chat.chatmsg.length){
+            this.props.getMsgList()
+            this.props.recvMsg()
+        }
     }
     handleChange(type,value){
         this.setState({
             [type]:value
         })
     }
-    handleSubmit(){
-        socket.emit('sendMsg',{text:this.state["chatContent"]})
-        this.setState({
-            chatContent:""
+    handleSubmit(){ 
+        let self=this
+        const data={
+            from:this.props.user._id,
+            to:this.props.match.params.id,
+            content:this.state.text
+        }
+        this.props.sendMsg({...data})
+        self.setState({
+            text:""
         })
     }
     render(){
+        const Item=List.Item
+        const myself=this.props.user._id
+        const navbar=this.props.match.params.id
+        const chatmsg=this.props.chat.chatmsg.filter(v=>
+            v.chatId==[navbar,this.props.user._id].sort().join('_')
+        )
         return (
-            <div style={{position:"fixed",bottom:0,width:"100%"}}>
-                <InputItem extra={<span onClick={()=>{this.handleSubmit()}}>发送</span>}
-                            value={this.state.chatContent}
-                            onChange={(v)=>{this.handleChange('chatContent',v)}}></InputItem>
+            <div id='chat-page'>
+                <NavBar icon={<Icon type="left" />} onLeftClick={() =>this.props.history.go(-1)}>{this.props.chatuser.userlist.filter(v=>v._id==navbar)[0].user}</NavBar>
+                {chatmsg.map((v,index)=>{
+                    if(v.from!=myself){
+                        return (
+                            <List key={index}>
+                                <Item
+                                    key={v.chatId}
+                                    thumb={require(`../img/${this.props.chatuser.userlist.filter(v=>v._id==navbar)[0].avatar}.png`)}>{v.content}</Item>
+                            </List>)
+                    }else{
+                        return (this.props.user.avatar?
+                            <List  key={index}>
+                            <Item   key={v.chatId}
+                                    className='chat-me'
+                                    extra={<img src={require(`../img/${this.props.user.avatar}.png`)}/>}>{v.content}</Item>
+                            </List>:null)
+                    }
+                })}
+                <div style={{position:"relative",marginTop:45,bottom:0,width:"100%"}}>
+                    <InputItem extra={<span onClick={()=>{this.handleSubmit()}}>发送</span>}
+                                value={this.state.text}
+                                onChange={(v)=>{this.handleChange('text',v)}}></InputItem>
+                </div>
+                
+
             </div>
         )
     }

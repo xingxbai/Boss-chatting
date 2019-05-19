@@ -7,9 +7,6 @@ export default function Hoc(Comp){
             this.handleChange=this.handleChange.bind(this)
         }
         handleChange(type,value){
-            console.log('====================================')
-            console.log(type,value)
-            console.log('====================================')
             this.setState({
                 [type]:value
             })

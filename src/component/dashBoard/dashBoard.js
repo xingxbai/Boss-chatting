@@ -4,16 +4,23 @@ import {Switch,Route,withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
 import NavLinkBar from '../navLinkBar/navLinkBar'
 import Boss from '../boss/boss'
+import Msg from '../msg/msg'
 import Genius from '../boss/boss'
 import Me from '../me/me'
-function Msg(){
-    return <div>Msg</div>
-}
+import {getMsgList,sendMsg,recvMsg} from '../../redux/chat.redux'
+
 @withRouter
 @connect(
-    state=>state
+    state=>state,
+    {getMsgList,sendMsg,recvMsg}
 )
  class DashBoard extends React.Component{
+     componentDidMount() {
+        if(!this.props.chat.chatmsg.length){
+            this.props.getMsgList()
+            this.props.recvMsg()
+        }
+    }
     render(){
         const user=this.props.user
         const pathname=this.props.location.pathname

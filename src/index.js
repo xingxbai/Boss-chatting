@@ -6,6 +6,7 @@ import {BrowserRouter,Route,Redirect,Switch} from 'react-router-dom'
 import 'antd-mobile/dist/antd-mobile.css';
 import thunk from 'redux-thunk'
 import './config'
+import './index.css'
 import Login from './container/login/login'
 import GeniusInfo from './container/geniusInfo/geniusInfo'
 import BossInfo from './container/bossInfo/bossInfo'
@@ -13,6 +14,7 @@ import Boss from './container/boss/boss'
 import Register from './container/register/register'
 import AuthRoute from './component/authroute/authroute'
 import Chat from './component/chat/chat'
+import Msg from './component/msg/msg'
 import DashBoard from './component/dashBoard/dashBoard'
 import reducers from './reducer'
 const store=createStore(reducers, compose(
@@ -39,7 +41,7 @@ ReactDOM.render((
                         <Route path='/' exact component={Login}/>
                         <Route path='/bossinfo'  component={BossInfo}/>
                         <Route path='/geniusinfo'  component={GeniusInfo}/>
-                        <Route path='/chat'  component={Chat}/>
+                        <Route path='/chat/:id'  component={Chat}/>
                         <Route path='/register' component={Register}/>
                         <Route path='/login' component={Login}/>
                         <Route component={DashBoard}/>

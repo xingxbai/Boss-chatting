@@ -3,6 +3,19 @@ const express = require('express');
 const Router = express.Router();
 const model = require('./model')
 const User = model.getModel('user')
+const Chat = model.getModel('chat')
+Router.get('/getchatlist',function(req,res){
+	const user=req.cookies.userid;
+	Chat.find({},function(err,doc){
+		if(!err){
+			return res.json({code:0,data:doc})
+		}
+	})
+})
+Router.get('/removelist',function(req,res){
+	Chat.remove({},function(err,doc){})
+	return res.send({code:0,msg:"用户信息验证成功"})
+})
 Router.get('/info',function(req,res){
 	const userid=req.cookies.userid;
 	User.findOne({_id:userid},{"pwd":0},function(err,doc){
