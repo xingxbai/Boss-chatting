@@ -90,7 +90,7 @@ export function logout(){
     // Cookies.remove('userid');
     return LogoutSuccess()
 }
-export function update({desc,title,avatar,money,company}){
+export function update({desc,title,avatar,money="",company=""}){
     return dispatch=>{
         axios.post('/user/update',{
             desc,title,avatar,money,company

@@ -15,9 +15,6 @@ io.on('connection',function(socket){
 		console.log(data)
 		Chat.create({from,to,content,chatId},function(err,doc){
 			if(!err){
-				console.log('====================================');
-				console.log(1);
-				console.log('====================================');
 				io.emit('recvmsg',Object.assign({},doc._doc))
 			}
 		})
@@ -27,7 +24,6 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use('/user',userRouter)
 server.listen(9093,function(){
-	console.log('Node app start at port 9093')
 })
 
 

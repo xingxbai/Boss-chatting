@@ -26,7 +26,7 @@ class GeniusInfo extends React.Component{
         const redirectTo=this.props.redirectTo;
         return (
             <div>
-            {pathname&&pathname!=redirectTo?<Redirect to={this.props.redirectTo}/>:null}
+            {pathname!=redirectTo?<Redirect to={this.props.redirectTo}/>:null}
                 <NavBar mode="dark" >牛人完善信息页</NavBar>
                 <AvatarSelector
                     selectAvatar={(imgname)=>{

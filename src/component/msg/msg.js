@@ -43,12 +43,12 @@ class Msg extends React.Component{
                             showunreadArray=v.filter(valu=>valu.to!=targetId)
                         }
                         let lastItem=showunreadArray[(showunreadArray.length)-1].content||""
-                        console.log(lastItem)
                         const unreadNum=v.filter(value=>value.to!=targetId&&!value.read).length
                         const showAboutMeChatList=v[0]||[]
                         const showAboutMeChatListBoolean=showAboutMeChatList.chatId==getChatId(targetId,userid)
                         return (useravatar&&showAboutMeChatListBoolean?<Item
                                 click={()=>{}}
+                                key={v._id}
                                 extra={unreadNum}
                                 onClick={()=>{this.linkChat(userinfoinfo._id)}}
                                 thumb={require('../img/'+ useravatar+'.png')}>

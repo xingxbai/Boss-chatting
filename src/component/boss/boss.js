@@ -22,6 +22,7 @@ class Boss extends React.Component{
         return (
             <div>
                 {this.props.userlist.map(v=>(
+                    v.avatar?
                     <Card  key={v.user} onClick={()=>{this.linkChat(v._id)}}>
                         <Card.Header
                         title={v.user}
@@ -33,7 +34,7 @@ class Boss extends React.Component{
                             {v.desc.split('\n').map(value=>(<div key={value}>{value}</div>))}
                         </div>
                         </Card.Body>
-                    </Card>
+                    </Card>:null
                 ))}
             </div>
             )

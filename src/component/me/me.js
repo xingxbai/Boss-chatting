@@ -27,7 +27,7 @@ class Me extends React.Component{
                 <List renderHeader={() =><div>简介</div>}>
                 <Item>{this.props.user.title}
                     {this.props.user.desc?this.props.user.desc.split('\n').map(v=>(
-                        <Brief>{v}</Brief>
+                        <Brief key={v}>{v}</Brief>
                     )):null}
                     {this.props.user.money?<Brief>薪资：{this.props.user.money}</Brief>:null}
                 </Item>
