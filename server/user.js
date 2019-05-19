@@ -12,6 +12,19 @@ Router.get('/getchatlist',function(req,res){
 		}
 	})
 })
+Router.get('/chatread',function(req,res){
+	const user=req.cookies.userid;
+	const to=req.query.to;
+	const chatId=[user,to].sort().join('_')
+	Chat.updateMany({to:user,chatId:chatId},{read:true},function(err,doc){
+		if(!err){
+			return res.json({code:0})
+		}else{
+			return res.json({code:1})
+		}
+	})
+	
+})
 Router.get('/removelist',function(req,res){
 	Chat.remove({},function(err,doc){})
 	return res.send({code:0,msg:"用户信息验证成功"})

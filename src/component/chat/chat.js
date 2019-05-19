@@ -2,6 +2,7 @@ import React from 'react'
 import {InputItem,List,NavBar,Icon,Grid} from 'antd-mobile'
 import {connect }from 'react-redux'
 import {getMsgList,sendMsg,recvMsg} from '../../redux/chat.redux'
+import axios from 'axios';
 @connect(
     state=>state,
     {getMsgList,sendMsg,recvMsg}
@@ -18,6 +19,11 @@ class Chat extends React.Component{
             this.props.getMsgList()
             this.props.recvMsg()
         }
+        axios.get('/user/chatread',{
+            params:{
+                to:this.props.match.params.id
+            }
+        }).then(this.props.getMsgList())
     }
     handleChange(type,value){
         this.setState({
@@ -68,8 +74,6 @@ class Chat extends React.Component{
                                 value={this.state.text}
                                 onChange={(v)=>{this.handleChange('text',v)}}></InputItem>
                 </div>
-                
-
             </div>
         )
     }
