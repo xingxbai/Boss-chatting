@@ -11,6 +11,7 @@ const Brief = Item.Brief;
     {logout}
 )
 class Me extends React.Component{
+    componentDidMount(){}
     logout(){
         Cookies.remove('userid');
         this.props.logout()
