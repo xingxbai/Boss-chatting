@@ -21,22 +21,13 @@ const store=createStore(reducers, compose(
     applyMiddleware(thunk),
     window.devToolsExtension?window.devToolsExtension():f=>f
 ))
-function Genius(){
-    return <h2>genius</h2>
-}
-function GeniusList(){
-    return <h2>geniusList</h2>
-}
-function NotFound(){
-    return <h2>404</h2>
-}
 
 
 ReactDOM.render((
     <Provider store={store}>
         <BrowserRouter>
             <div>
-                
+         
                     <Switch>
                         <Route path='/' exact component={Login}/>
                         <Route path='/bossinfo'  component={BossInfo}/>
@@ -51,4 +42,4 @@ ReactDOM.render((
     </Provider>
     ),
     document.getElementById('root'));
-    // <AuthRoute/>
+    //    <AuthRoute/>
