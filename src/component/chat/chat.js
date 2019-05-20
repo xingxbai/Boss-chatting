@@ -50,10 +50,11 @@ class Chat extends React.Component{
         const chatmsg=this.props.chat.chatmsg.filter(v=>
             v.chatId==[navbar,this.props.user._id].sort().join('_')
         )
+        const user=this.props.chatuser.userlist.filter(v=>v._id==navbar)[0]||[]
         return (
-            
+            user?
             <div id='chat-page'>
-                <NavBar icon={<Icon type="left" />} onLeftClick={() =>this.props.history.go(-1)}>{this.props.chatuser.userlist.filter(v=>v._id==navbar)[0].user}</NavBar>
+                <NavBar icon={<Icon type="left" />} onLeftClick={() =>this.props.history.go(-1)}>{user.user}</NavBar>
                 <QueueAnim type='left' deplay='60'>
                 {chatmsg.map((v)=>{
                     if(v.from!=myself){
@@ -77,7 +78,7 @@ class Chat extends React.Component{
                                 value={this.state.text}
                                 onChange={(v)=>{this.handleChange('text',v)}}></InputItem>
                 </div>
-            </div>
+            </div>:null
         )
     }
 }

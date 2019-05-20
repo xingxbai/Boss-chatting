@@ -12,6 +12,18 @@ Router.get('/getchatlist',function(req,res){
 		}
 	})
 })
+Router.get('/chattingRead',function(req,res){
+	const user=req.cookies.userid;
+	const targetId=req.query.targetId;
+	const chatId=[user,targetId].sort().join('_')
+	Chat.updateMany({to:user,chatId:chatId},{read:true},function(err,doc){
+		if(!err){
+			return res.json({code:0})
+		}else{
+			return res.json({code:1})
+		}
+	})
+})
 Router.get('/chatread',function(req,res){
 	const user=req.cookies.userid;
 	const to=req.query.to;
@@ -23,7 +35,6 @@ Router.get('/chatread',function(req,res){
 			return res.json({code:1})
 		}
 	})
-	
 })
 Router.get('/removelist',function(req,res){
 	Chat.remove({},function(err,doc){})

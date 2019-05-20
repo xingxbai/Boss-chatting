@@ -18,7 +18,7 @@ class Me extends React.Component{
         this.props.history.push('/login')
     }
     render(){
-        return (
+        return (this.props.user.avatar?
             <div>
                 <Result
                 img={<img src={require('../img/'+this.props.user.avatar +'.png')} style={{width:"50px"}}/>}
@@ -35,7 +35,7 @@ class Me extends React.Component{
                 <WhiteSpace></WhiteSpace>
                 <Button onClick={()=>{this.logout()}}>退出登录</Button>
                 </List>
-            </div>
+            </div>:null
         )
     }
 }

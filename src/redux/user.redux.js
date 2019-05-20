@@ -21,7 +21,7 @@ export function user(state=initState,action){
         case UPDATE_SUCCESS:
             return {...state,...action.payload,msg:"",redirectTo:getRedirectPath(action.payload),isAuth:true,avatar:action.avatar}
         case LOAD_DATA:
-            return {...state,...action.payload,msg:"",redirectTo:getRedirectPath(action.payload),isAuth:true,avatar:action.avatar}
+        return {...state,...action.payload,msg:"",redirectTo:getRedirectPath(action.payload),isAuth:true,avatar:action.payload.avatar}
         case ERROR_MSG:
             return {...state,msg:action.msg}
         case LOGIN_SUCESS:
@@ -42,10 +42,10 @@ function updateSuccess(data){
     return {type:UPDATE_SUCCESS,payload:data}
 }
 function LoginSuccess(data){
+    window.localStorage.setItem('user_id',data._id)
     return {type:LOGIN_SUCESS,payload:data}
 }
 function LogoutSuccess(){
-    
     return {type:LOGOUT_SUCESS}
 }
 export function register({user,pwd,repeatpwd,type}){
@@ -107,5 +107,3 @@ export function update({desc,title,avatar,money="",company=""}){
 export function loadData(data){
     return {type:LOAD_DATA,payload:data}
 }
-
-                                                       

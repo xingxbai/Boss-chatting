@@ -7,19 +7,22 @@ import Boss from '../boss/boss'
 import Msg from '../msg/msg'
 import Genius from '../boss/boss'
 import Me from '../me/me'
-import {getMsgList,sendMsg,recvMsg} from '../../redux/chat.redux'
+import {getMsgList,sendMsg,recvMsg,firstUnread} from '../../redux/chat.redux'
 
 @withRouter
 @connect(
     state=>state,
-    {getMsgList,sendMsg,recvMsg}
+    {getMsgList,sendMsg,recvMsg,firstUnread}
 )
 class DashBoard extends React.Component{
     componentDidMount() {
+        let targetId=""
+        this.props.firstUnread()
         if(!this.props.chat.chatmsg.length){
             this.props.getMsgList()
-            this.props.recvMsg()
+            this.props.recvMsg(targetId)
         }
+        // this.props.getMsgList()
     }
     render(){
         const user=this.props.user

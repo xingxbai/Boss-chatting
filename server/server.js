@@ -11,6 +11,9 @@ const userRouter = require('./user')
 
 io.on('connection',function(socket){
 	socket.on('sendMsg',function(data){
+		console.log('====================================');
+		console.log(data);
+		console.log('====================================');
 		const {from,to,content}=data
 		const chatId=[from,to].sort().join('_')
 		Chat.create({from,to,content,chatId},function(err,doc){
