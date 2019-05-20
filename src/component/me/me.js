@@ -20,7 +20,7 @@ class Me extends React.Component{
         return (
             <div>
                 <Result
-                img={<img src={require('../img/boy.png')} style={{width:"50px"}}/>}
+                img={<img src={require('../img/'+this.props.user.avatar +'.png')} style={{width:"50px"}}/>}
                 title={this.props.user.user}
                 message={this.props.company?<div>{this.props.company}</div>:null}
                 />
