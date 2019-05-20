@@ -74,7 +74,14 @@
     "server": "nodemon server/server.js"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules":{
+      "eqeqeq":["off"],
+      "no-unused-vars":["off"],
+      "no-useless-constructor":["off"],
+      "jsx-a11y/alt-text":["off"],
+      "no-useless-concat":["off"]
+    }
   },
   "browserslist": {
     "production": [
