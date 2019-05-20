@@ -14,8 +14,8 @@ import {getMsgList,sendMsg,recvMsg} from '../../redux/chat.redux'
     state=>state,
     {getMsgList,sendMsg,recvMsg}
 )
- class DashBoard extends React.Component{
-     componentDidMount() {
+class DashBoard extends React.Component{
+    componentDidMount() {
         if(!this.props.chat.chatmsg.length){
             this.props.getMsgList()
             this.props.recvMsg()

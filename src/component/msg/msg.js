@@ -2,6 +2,7 @@ import React from 'react'
 import { List, Badge} from 'antd-mobile';
 import {connect} from 'react-redux'
 import {getMsgList,sendMsg,recvMsg} from '../../redux/chat.redux'
+import QueueAnim from 'rc-queue-anim'
 import axios from 'axios';
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -29,6 +30,7 @@ class Msg extends React.Component{
             return [from,to].sort().join('_')
         }
         return (
+            <QueueAnim type='left' delay='500'>
             <div>
                 <List>
                     {msgList.map(v=>{
@@ -58,6 +60,7 @@ class Msg extends React.Component{
                         })}
                 </List>
             </div>
+            </QueueAnim>
         )
     }
 }

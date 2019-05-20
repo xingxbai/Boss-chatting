@@ -107,3 +107,5 @@ export function update({desc,title,avatar,money="",company=""}){
 export function loadData(data){
     return {type:LOAD_DATA,payload:data}
 }
+
+                                                       

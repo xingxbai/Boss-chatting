@@ -24,12 +24,12 @@ class Me extends React.Component{
                 title={this.props.user.user}
                 message={this.props.company?<div>{this.props.company}</div>:null}
                 />
-                <List renderHeader={() =><div>简介</div>}>
-                <Item>{this.props.user.title}
+                <List renderHeader={() =><div style={{textAlign:"center"}}>简介</div>}>
+                <Item style={{textAlign:"center"}}>{this.props.user.title}
                     {this.props.user.desc?this.props.user.desc.split('\n').map(v=>(
-                        <Brief key={v}>{v}</Brief>
+                        <Brief style={{textAlign:"center"}} key={v}>{v}</Brief>
                     )):null}
-                    {this.props.user.money?<Brief>薪资：{this.props.user.money}</Brief>:null}
+                    {this.props.user.money?<Brief style={{textAlign:"center"}}>薪资：{this.props.user.money}</Brief>:null}
                 </Item>
                 <WhiteSpace></WhiteSpace>
                 <Button onClick={()=>{this.logout()}}>退出登录</Button>
