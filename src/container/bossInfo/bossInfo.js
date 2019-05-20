@@ -29,7 +29,7 @@ class BossInfo extends React.Component{
         })
         .then(res=>{
             if(res.status==200&&res.data.code==0){
-                this.props.history.push('/login')
+                window.location.href='/login'
             }
         })
     }
@@ -66,7 +66,7 @@ class BossInfo extends React.Component{
                 labelNumber={5}
             />
                 <WhiteSpace/>
-                <Button type="primary" onClick={()=>{this.props.update(this.state)}}>提交</Button>
+                <Button type="primary" onClick={()=>{this.update(this.state)}}>提交</Button>
             </div>)
     }
 }

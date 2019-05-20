@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom'
 import {update} from '../../redux/user.redux'
 import { Grid,NavBar,InputItem,Button,TextareaItem,WhiteSpace } from 'antd-mobile';
 import AvatarSelector from '../../component/avatar-selector/avatar-selector'
+import axios from 'axios'
 @connect(
     state=>state.user,
     {update}
@@ -20,7 +21,18 @@ class GeniusInfo extends React.Component{
 		this.setState({
 			[key]:val
 		})
-	}
+    }
+    update(){
+        const{desc,title,avatar,money,company}={...this.state}
+        axios.post('/user/update',{
+            desc,title,avatar,money,company
+        })
+        .then(res=>{
+            if(res.status==200&&res.data.code==0){
+                window.location.href='/login'
+            }
+        })
+    }
     render(){
         const pathname=this.props.location.pathname;
         const redirectTo=this.props.redirectTo;
@@ -48,7 +60,7 @@ class GeniusInfo extends React.Component{
                 labelNumber={5}
             />
                 <WhiteSpace/>
-                <Button type="primary" onClick={()=>{this.props.update(this.state)}}>提交</Button>
+                <Button type="primary" onClick={()=>{this.update(this.state)}}>提交</Button>
             </div>)
     }
 }
