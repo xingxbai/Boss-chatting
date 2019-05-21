@@ -17,7 +17,7 @@ import {getMsgList,sendMsg,recvMsg,firstUnread} from '../../redux/chat.redux'
 class DashBoard extends React.Component{
     componentDidMount() {
         let targetId=""
-        this.props.firstUnread()
+        // this.props.firstUnread()
         if(!this.props.chat.chatmsg.length){
             this.props.getMsgList()
             this.props.recvMsg(targetId)
