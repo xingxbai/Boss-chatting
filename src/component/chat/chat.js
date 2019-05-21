@@ -1,12 +1,12 @@
 import React from 'react'
 import {InputItem,List,NavBar,Icon,Grid} from 'antd-mobile'
 import {connect }from 'react-redux'
-import {getMsgList,sendMsg,recvMsg} from '../../redux/chat.redux'
+import {getMsgList,sendMsg,recvMsg,chattingsss} from '../../redux/chat.redux'
 import axios from 'axios';
 import QueueAnim from 'rc-queue-anim'
 @connect(
     state=>state,
-    {getMsgList,sendMsg,recvMsg}
+    {getMsgList,sendMsg,recvMsg,chattingsss}
 )
 class Chat extends React.Component{
     constructor(props){
@@ -20,18 +20,26 @@ class Chat extends React.Component{
             this.props.getMsgList()
             this.props.recvMsg()
         }
-        axios.get('/user/chatread',{
-            params:{
-                to:this.props.match.params.id
-            }
-        }).then(this.props.getMsgList())
+        // axios.get('/user/chatread',{
+        //     params:{
+        //         to:this.props.match.params.id
+        //     }
+        // }).then(this.props.getMsgList())
     }
     handleChange(type,value){
         this.setState({
             [type]:value
         })
     }
-    handleSubmit(){ 
+    componentWillUnmount() {
+        this.props.chattingsss(this.props.match.params.id)
+        // axios.get('/user/chattingRead',{
+        //             params:{
+        //                 targetId:this.props.match.params.id
+        //             }
+        //         })
+    }
+    handleSubmit(){
         let self=this
         const data={
             from:this.props.user._id,

@@ -12,13 +12,17 @@ Router.get('/getchatlist',function(req,res){
 		}
 	})
 })
+Router.get('/Chatting',function(req,res){
+	const user=req.cookies.userid
+	const targetId=req.query.targetId
+})
 Router.get('/chattingRead',function(req,res){
 	const user=req.cookies.userid;
 	const targetId=req.query.targetId;
 	const chatId=[user,targetId].sort().join('_')
 	Chat.updateMany({to:user,chatId:chatId},{read:true},function(err,doc){
 		if(!err){
-			return res.json({code:0})
+			return res.json({code:0,count:doc.nModified})
 		}else{
 			return res.json({code:1})
 		}
