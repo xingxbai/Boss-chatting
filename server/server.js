@@ -33,5 +33,5 @@ app.use(function(req,res,next){
 app.use(express.static(path.resolve('build')))
 app.use(bodyParser.json())
 app.use('/user',userRouter)
-server.listen(3006,function(){
+server.listen(9093,function(){
 })
