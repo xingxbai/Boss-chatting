@@ -1,5 +1,6 @@
 
 import axios from 'axios'
+import { Toast } from 'antd-mobile'
 import {getRedirectPath} from '../util'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const LOGIN_SUCESS = 'LOGIN_SUCESS'
@@ -61,6 +62,7 @@ export function register({user,pwd,repeatpwd,type}){
         })
         .then(res=>{
             if(res.status==200&&res.data.code==0){
+                Toast.info('注册成功',1)
                 dispatch(registerSuccess({user,pwd,type}))
             }else{
                 dispatch(errMsg(res.data.msg))
