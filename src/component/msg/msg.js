@@ -55,7 +55,7 @@ class Msg extends React.Component{
                                 onClick={()=>{this.linkChat(userinfoinfo._id)}}
                                 thumb={require('../img/'+ useravatar+'.png')}>
                                         <Brief>{username}</Brief>
-                                        {lastItem}
+                                        {v[v.length-1].content}
                                     </Item>:null)
                         })}
                 </List>

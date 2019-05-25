@@ -62,7 +62,9 @@ class Chat extends React.Component{
         return (
             user?
             <div id='chat-page'>
-                <NavBar icon={<Icon type="left" />} onLeftClick={() =>this.props.history.go(-1)}>{user.user}</NavBar>
+            <div  style={{position:"fixed" ,top:0,height:"60px",zIndex:999,left:0,right:0}}>
+                <NavBar icon={<Icon type="left" />}onLeftClick={() =>this.props.history.go(-1)}>{user.user}</NavBar>
+                </div>
                 <QueueAnim type='left' deplay='60'>
                 {chatmsg.map((v)=>{
                     if(v.from!=myself){
